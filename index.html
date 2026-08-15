@@ -693,7 +693,7 @@
 
   <!-- MUSIK BACKGROUND -->
   <audio id="bgm" loop>
-    <source src="GANTI_DENGAN_LINK_MUSIK.mp3" type="audio/mpeg"> <!-- GANTI DI SINI -->
+    <source src="mp3/original%20sound%20-%20deviledcraig_musicaldown.com_1786812508.mp3" type="audio/mpeg">
   </audio>
   <button id="music-btn" title="Putar / Jeda Musik">🎵</button>
 
@@ -791,15 +791,15 @@
     <h2 class="section-title fade-in">Galeri Foto</h2>
     <div class="gallery-grid">
       <div class="gallery-item fade-in">
-        <img src="GANTI_DENGAN_LINK_FOTO_1.jpg" alt="Foto pertama kita" onerror="this.style.display='none'"> <!-- GANTI DI SINI -->
+        <img src="images/IMG_1374.JPG" alt="Foto pertama kita" onerror="this.style.display='none'">
         <div class="gallery-caption">Foto pertama kita</div>
       </div>
       <div class="gallery-item fade-in">
-        <img src="GANTI_DENGAN_LINK_FOTO_2.jpg" alt="Kamu pas ketawa paling cantik" onerror="this.style.display='none'"> <!-- GANTI DI SINI -->
+        <img src="images/IMG_20260601_23045955.jpg" alt="Kamu pas ketawa paling cantik" onerror="this.style.display='none'">
         <div class="gallery-caption">Kamu pas ketawa paling cantik</div>
       </div>
       <div class="gallery-item fade-in">
-        <img src="GANTI_DENGAN_LINK_FOTO_3.jpg" alt="Aku kangen momen ini" onerror="this.style.display='none'"> <!-- GANTI DI SINI -->
+        <img src="images/IMG_9503.jpg" alt="Aku kangen momen ini" onerror="this.style.display='none'">
         <div class="gallery-caption">Aku kangen momen ini</div>
       </div>
     </div>
@@ -807,17 +807,17 @@
 
   <!-- SECTION F: LETTER -->
   <section id="letter">
-    <span class="eyebrow fade-in">Dari Hati</span>
+    <span class="eyebrow.fade-in">Dari Hati</span>
     <h2 class="section-title fade-in">Ini dari aku untuk kamu</h2>
     <div class="letter-box fade-in">
       <p>
-        Halo my princess aku, selamat ulang tahun ya sayang, and make a wish ur b'day. Tepat pada hari ini umur kamu bertambah satu tahun, semoga rezeki kamu dilancarkan dan semoga segala urusan kamu dimudahkan ya sayang.
+        Halo my princess aku, selamat ulang tahun ya sayang, and make a wish ur b'day. Tepat pada hari ini umur kamu bertambah satu tahun, semoga rezeki kamu dilancarkan dan semoga segala urusan [...]
         <br><br>
-        Aku selalu doain buat kamu, semoga di tahun ini atau di tahun yang akan datang bisa cepet-cepet dapet kerjaan yang kamu inginkan, apapun yang kamu inginkan semua bisa terwujud, dan semoga kamu sehat-sehat terus ya di sana.
+        Aku selalu doain buat kamu, semoga di tahun ini atau di tahun yang akan datang bisa cepet-cepet dapet kerjaan yang kamu inginkan, apapun yang kamu inginkan semua bisa terwujud, dan semoga[...]
         <br><br>
-        Aku berharap semoga kamu bisa menjadi pribadi yang lebih baik lagi ke depannya, tambah dewasa, dan semoga bisa berpikir terlebih dahulu sebelum melakukan tindakan. Kamu terlahir di dunia ini dari kecil dan sekarang sudah sebesar ini, banyak hal yang sudah kamu lakukan, dan masih banyak hal yang belum kamu lakukan.
+        Aku berharap semoga kamu bisa menjadi pribadi yang lebih baik lagi ke depannya, tambah dewasa, dan semoga bisa berpikir terlebih dahulu sebelum melakukan tindakan. Kamu terlahir di dunia [...]
         <br><br>
-        Terima kasih sudah menjadi perempuan yang kuat selama ini, terima kasih sudah mau bertahan sampai sejauh ini, dan terima kasih sudah menjadi perempuanku yang hebat. Bahagia selalu ya sayang 💗💗💗
+        Terima kasih sudah menjadi perempuan yang kuat selama ini, terima kasih sudah mau bertahan sampai sejauh ini, dan terima kasih sudah menjadi perempuanku yang hebat. Bahagia selalu ya saya[...]
       </p>
       <span class="signature">Wildan</span>
     </div>
@@ -998,69 +998,54 @@
     elMins.textContent = pad(mins);
     elSecs.textContent = pad(secs);
   }
+
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  /* ============ HERO BUTTON: SCROLL KE SECTION BERIKUTNYA ============ */
-  document.getElementById('hero-btn').addEventListener('click', ()=>{
-    document.getElementById('cake').scrollIntoView({ behavior:'smooth' });
-  });
-
-  /* ============ CONFETTI GENERATOR ============ */
-  const confettiColors = ['#D4AF37', '#f1d98b', '#FFF8E7', '#b8791a'];
-  function fireConfetti(count = 45){
-    for(let i=0;i<count;i++){
-      const piece = document.createElement('div');
-      piece.className = 'confetti-piece';
-      piece.style.left = Math.random()*100 + 'vw';
-      piece.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
-      piece.style.animationDuration = (2 + Math.random()*1.8) + 's';
-      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-      document.body.appendChild(piece);
-      setTimeout(()=> piece.remove(), 4200);
-    }
-  }
-
-  /* ============ CAKE INTERACTION ============ */
+  /* ============ CAKE & WISH INTERACTIONS ============ */
   const cakeWrap = document.getElementById('cake-wrap');
-  const candlesWrap = document.getElementById('candles');
   const wishPopup = document.getElementById('wish-popup');
   const wishClose = document.getElementById('wish-close');
-  let cakeBlown = false;
 
   cakeWrap.addEventListener('click', ()=>{
-    if(cakeBlown) return;
-    cakeBlown = true;
+    // extinguish flames + smoke + confetti
+    document.querySelectorAll('.flame').forEach(f=> f.classList.add('out'));
+    // smoke
+    for(let i=0;i<6;i++){
+      const s = document.createElement('div'); s.className='smoke';
+      s.style.left = (50 + (Math.random()*24-12)) + '%'; s.style.top = (window.innerHeight/2 - 80 + Math.random()*40) + 'px';
+      document.body.appendChild(s);
+      setTimeout(()=>{ s.classList.add('rise'); }, 50 + i*120);
+      setTimeout(()=>{ s.remove(); }, 1800 + i*200);
+    }
+    // confetti
+    for(let i=0;i<12;i++){
+      const c = document.createElement('div'); c.className='confetti-piece';
+      c.style.left = Math.random()*100 + 'vw'; c.style.background = ['#D4AF37','#F1D98B','#C49B3C','#FFD66B'][Math.floor(Math.random()*4)];
+      c.style.width = (6+Math.random()*10)+'px'; c.style.height = (8+Math.random()*16)+'px';
+      c.style.animationDuration = (1.2+Math.random()*1.2)+'s';
+      document.body.appendChild(c);
+      setTimeout(()=>{ c.remove(); }, 2000 + Math.random()*1200);
+    }
 
-    const flames = cakeWrap.querySelectorAll('.flame');
-    flames.forEach((f, i)=>{
-      setTimeout(()=>{
-        f.classList.add('out');
-        const smoke = document.createElement('div');
-        smoke.className = 'smoke';
-        smoke.style.left = f.getBoundingClientRect().left - cakeWrap.getBoundingClientRect().left + 2 + 'px';
-        candlesWrap.appendChild(smoke);
-        requestAnimationFrame(()=> smoke.classList.add('rise'));
-        setTimeout(()=> smoke.remove(), 1400);
-      }, i*90);
-    });
-
-    setTimeout(()=>{
-      fireConfetti(60);
-      wishPopup.classList.add('show');
-    }, 700);
+    setTimeout(()=>{ wishPopup.classList.add('show'); }, 700);
   });
 
-  wishClose.addEventListener('click', ()=> wishPopup.classList.remove('show'));
+  wishClose.addEventListener('click', ()=>{ wishPopup.classList.remove('show'); });
 
-  /* ============ GIFT BOXES ============ */
+  /* ============ GIFTS INTERACTION ============ */
   document.querySelectorAll('.gift-box').forEach(box=>{
     box.addEventListener('click', ()=>{
-      if(box.classList.contains('opened')) return;
-      box.classList.add('opened');
-      fireConfetti(35);
+      box.classList.toggle('opened');
     });
   });
+
+  /* ============ HERO BUTTON (scroll to letter) ============ */
+  document.getElementById('hero-btn').addEventListener('click', ()=>{
+    document.getElementById('letter').scrollIntoView({ behavior:'smooth' });
+  });
+
+  /* ============ OPTIONAL: reveal main site after unlock (handled earlier) ============ */
 
 })();
 </script>
